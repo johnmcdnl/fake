@@ -1,6 +1,7 @@
 package fake
 
 import (
+	"math"
 	"math/rand"
 	"reflect"
 	"time"
@@ -78,6 +79,10 @@ func fake(v reflect.Value) {
 
 var src = rand.NewSource(time.Now().UnixNano())
 
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
+
 func setRandomInvalid(v reflect.Value) {
 	panic(v.Kind())
 }
@@ -87,47 +92,47 @@ func setRandomBool(v reflect.Value) {
 }
 
 func setRandomInt(v reflect.Value) {
-	v.SetInt(1234)
+	v.SetInt(randomInt(1, math.MaxInt64))
 }
 
 func setRandomInt8(v reflect.Value) {
-	v.SetInt(1234)
+	v.SetInt(randomInt(1, math.MaxInt8))
 }
 
 func setRandomInt16(v reflect.Value) {
-	v.SetInt(1234)
+	v.SetInt(randomInt(1, math.MaxInt16))
 }
 
 func setRandomInt32(v reflect.Value) {
-	v.SetInt(1234)
+	v.SetInt(randomInt(1, math.MaxInt32))
 }
 
 func setRandomInt64(v reflect.Value) {
-	v.SetInt(1234)
+	v.SetInt(randomInt(1, math.MaxInt64))
 }
 
 func setRandomUint(v reflect.Value) {
-	var u uint = 1234
+	u := uint(randomInt(1, math.MaxInt64))
 	v.Set(reflect.ValueOf(u))
 }
 
 func setRandomUint8(v reflect.Value) {
-	var u uint8 = 123
+	u := uint8(randomInt(1, math.MaxUint8))
 	v.Set(reflect.ValueOf(u))
 }
 
 func setRandomUint16(v reflect.Value) {
-	var u uint16 = 1234
+	u := uint16(randomInt(1, math.MaxUint16))
 	v.Set(reflect.ValueOf(u))
 }
 
 func setRandomUint32(v reflect.Value) {
-	var u uint32 = 1234
+	u := uint32(randomInt(1, math.MaxUint32))
 	v.Set(reflect.ValueOf(u))
 }
 
 func setRandomUint64(v reflect.Value) {
-	var u uint64 = 1234
+	u := uint64(randomInt(1, math.MaxInt64))
 	v.Set(reflect.ValueOf(u))
 }
 
@@ -218,4 +223,13 @@ func setRandomStruct(v reflect.Value) {
 
 func setRandomUnsafePointer(v reflect.Value) {
 
+}
+
+func randomInt(min, max int) int64 {
+	n := rand.Intn(max)
+	//TODO fix this up
+	if n <= min {
+		randomInt(min, max)
+	}
+	return int64(n)
 }
