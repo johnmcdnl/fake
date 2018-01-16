@@ -104,23 +104,28 @@ func setRandomInt64(v reflect.Value) {
 }
 
 func setRandomUint(v reflect.Value) {
-
+	var u uint = 1234
+	v.Set(reflect.ValueOf(u))
 }
 
 func setRandomUint8(v reflect.Value) {
-
+	var u uint8 = 123
+	v.Set(reflect.ValueOf(u))
 }
 
 func setRandomUint16(v reflect.Value) {
-
+	var u uint16 = 1234
+	v.Set(reflect.ValueOf(u))
 }
 
 func setRandomUint32(v reflect.Value) {
-
+	var u uint32 = 1234
+	v.Set(reflect.ValueOf(u))
 }
 
 func setRandomUint64(v reflect.Value) {
-
+	var u uint64 = 1234
+	v.Set(reflect.ValueOf(u))
 }
 
 func setRandomUintptr(v reflect.Value) {
