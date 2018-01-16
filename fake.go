@@ -71,31 +71,31 @@ func fake(v reflect.Value) {
 }
 
 func setRandomInvalid(v reflect.Value) {
-
+	panic(v.Kind())
 }
 
 func setRandomBool(v reflect.Value) {
-
+	v.SetBool(true)
 }
 
 func setRandomInt(v reflect.Value) {
-
+	v.SetInt(1234)
 }
 
 func setRandomInt8(v reflect.Value) {
-
+	v.SetInt(1234)
 }
 
 func setRandomInt16(v reflect.Value) {
-
+	v.SetInt(1234)
 }
 
 func setRandomInt32(v reflect.Value) {
-
+	v.SetInt(1234)
 }
 
 func setRandomInt64(v reflect.Value) {
-
+	v.SetInt(1234)
 }
 
 func setRandomUint(v reflect.Value) {
@@ -123,11 +123,11 @@ func setRandomUintptr(v reflect.Value) {
 }
 
 func setRandomFloat32(v reflect.Value) {
-
+	v.SetFloat(1.234)
 }
 
 func setRandomFloat64(v reflect.Value) {
-
+	v.SetFloat(1.234)
 }
 
 func setRandomComplex64(v reflect.Value) {
@@ -151,7 +151,7 @@ func setRandomFunc(v reflect.Value) {
 }
 
 func setRandomInterface(v reflect.Value) {
-
+	fake(v.Elem())
 }
 
 func setRandomMap(v reflect.Value) {
@@ -159,7 +159,8 @@ func setRandomMap(v reflect.Value) {
 }
 
 func setRandomPtr(v reflect.Value) {
-
+	v.Set(reflect.New(v.Type().Elem()))
+	fake(v.Elem())
 }
 
 func setRandomSlice(v reflect.Value) {
@@ -167,11 +168,18 @@ func setRandomSlice(v reflect.Value) {
 }
 
 func setRandomString(v reflect.Value) {
-
+	v.SetString("hello world")
 }
 
 func setRandomStruct(v reflect.Value) {
-
+	for i := 0; i < v.NumField(); i++ {
+		field := v.Field(i)
+		if field.Kind() == reflect.Ptr {
+			setRandomPtr(field)
+			continue
+		}
+		fake(field)
+	}
 }
 
 func setRandomUnsafePointer(v reflect.Value) {
