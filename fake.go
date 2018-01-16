@@ -141,11 +141,11 @@ func setRandomFloat64(v reflect.Value) {
 }
 
 func setRandomComplex64(v reflect.Value) {
-
+	v.SetComplex(64)
 }
 
 func setRandomComplex128(v reflect.Value) {
-
+	v.SetComplex(128)
 }
 
 func setRandomArray(v reflect.Value) {
