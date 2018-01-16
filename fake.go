@@ -5,10 +5,15 @@ import (
 )
 
 func Fake(i interface{}) {
+	v := reflect.ValueOf(&i)
+	fake(v)
 
 }
 
 func fake(v reflect.Value) {
+	if v.Kind() == reflect.Ptr {
+		v = v.Elem()
+	}
 	switch v.Kind() {
 	default:
 		panic(v.Kind())
