@@ -129,7 +129,8 @@ func setRandomUint64(v reflect.Value) {
 }
 
 func setRandomUintptr(v reflect.Value) {
-
+	var u uintptr = 8
+	v.Set(reflect.ValueOf(u))
 }
 
 func setRandomFloat32(v reflect.Value) {
