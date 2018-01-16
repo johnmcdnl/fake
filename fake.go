@@ -142,19 +142,19 @@ func setRandomUintptr(v reflect.Value) {
 }
 
 func setRandomFloat32(v reflect.Value) {
-	v.SetFloat(1.234)
+	v.SetFloat(float64(rand.Float32()))
 }
 
 func setRandomFloat64(v reflect.Value) {
-	v.SetFloat(1.234)
+	v.SetFloat(rand.Float64())
 }
 
 func setRandomComplex64(v reflect.Value) {
-	v.SetComplex(64)
+	v.SetComplex(complex(rand.Float64(), 2))
 }
 
 func setRandomComplex128(v reflect.Value) {
-	v.SetComplex(128)
+	v.SetComplex(complex(rand.Float64(), 2))
 }
 
 func setRandomArray(v reflect.Value) {
